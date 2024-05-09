@@ -1,0 +1,15 @@
+{:pedestal-duct.server/server
+ {:spec #ig/ref :dev/clojure-spec}
+
+ :pedestal-duct.service/env :dev
+
+ :pedestal-duct.service/service-map
+ {;; do not block thread that starts web server
+  :io.pedestal.http/join? false
+  ;; all origins are allowed in dev mode
+  :io.pedestal.http/allowed-origins {:creds true :allowed-origins #ig/ref :dev/dev-allowed-origins}
+  ;; Content Security Policy (CSP) is mostly turned off in dev mode
+  :io.pedestal.http/secure-headers {:content-security-policy-settings {:object-src "'none'"}}}
+
+ :dev/clojure-spec {}
+ :dev/dev-allowed-origins {}}
